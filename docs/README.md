@@ -2,22 +2,6 @@
 
 这是一个 Python socket 聊天系统项目，主要可运行版本在 `simple_gui/`。它支持多客户端登录、在线用户列表、点对点聊天、聊天记录搜索、莎士比亚十四行诗查询，以及基于 DeepSeek/OpenAI-compatible API 的聊天机器人功能。
 
-## 作者与来源信息
-
-我根据仓库里的 Git 记录、文件头注释和文档元数据整理了作者信息：
-
-- 当前 Git 仓库只有 1 个提交作者：`eLiAshaun <zs3129@nyu.edu>`。
-- 最新提交：`6dff10f icdsprojectforuse`，提交时间为 `2026-05-04`。
-- PDF/DOCX 的 macOS 元数据没有显示作者字段。
-- 部分代码文件保留了原始模板作者标注：
-  - `simple_gui/chat_server.py`：`alina, zzhang`
-  - `simple_gui/client_state_machine.py`：`zhengzhang`
-  - `simple_gui/GUI.py`：`bing`
-  - `simple_gui/indexer.py`、`simple_gui/roman2num.py`：`zzhang`
-  - `simple_gui/chat_group.py`：`zhengzhang`
-- 原始参考版本和独立示例脚本已移到本地 `unused_code/`，并从 Git 跟踪中移除。
-- 这个 `README.md` 是根据现有仓库内容整理出来的使用说明；仓库里原有代码不是本次新写的。
-
 ## 项目结构
 
 ```text
