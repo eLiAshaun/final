@@ -4,6 +4,7 @@ Created on Sat Jul  5 11:38:58 2014
 
 @author: zzhang
 """
+import os
 import pickle
 
 class Index:
@@ -50,8 +51,11 @@ class Index:
 
 class PIndex(Index):
     def __init__(self, name):
-        super().__init__(name)
-        roman_int_f = open('roman.txt.pk', 'rb')
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        data_path = name if os.path.isabs(name) else os.path.join(base_dir, name)
+        super().__init__(data_path)
+        roman_path = os.path.join(base_dir, 'roman.txt.pk')
+        roman_int_f = open(roman_path, 'rb')
         self.int2roman = pickle.load(roman_int_f)
         roman_int_f.close()
         self.load_poems()
@@ -63,8 +67,10 @@ class PIndex(Index):
             self.add_msg_and_index(l.rstrip())
     
     def get_poem(self, p):
+        if p not in self.int2roman:
+            return []
         p_str = self.int2roman[p] + '.'
-        p_next_str = self.int2roman[p + 1] + '.'
+        p_next_str = self.int2roman.get(p + 1, '') + '.'
         temp = self.search(p_str)
         if temp:
             [(go_line, m)] = temp
@@ -75,7 +81,7 @@ class PIndex(Index):
         end = self.get_msg_size()
         while go_line < end:
             this_line = self.get_msg(go_line)
-            if this_line == p_next_str:
+            if p_next_str != '.' and this_line == p_next_str:
                 break
             poem.append(this_line)
             go_line += 1

@@ -250,14 +250,14 @@ Add commands that analyze real chat history:
 
 - `simple_gui/client_state_machine.py`
 - Possibly `simple_gui/chat_server.py` if the server should store shared room history.
-- Existing helper file: `nlp_tools.py`
+- Existing helper file: `simple_gui/nlp_tools.py`
 
 ### 4.3 Implementation Steps
 
 1. Add `self.chat_history = []` to `ClientSM.__init__`.
 2. Whenever the user sends a normal message, append the text to `self.chat_history`.
 3. Whenever a peer message arrives, append the peer's message text to `self.chat_history`.
-4. Import `extract_keywords_yake` and `summarize_with_sumy` from `nlp_tools.py`.
+4. Import `extract_keywords_yake` and `summarize_with_sumy` from `simple_gui/nlp_tools.py`.
 5. Add a `/keywords` branch in both logged-in and chatting states.
 6. Add a `/summary` branch in both logged-in and chatting states.
 7. Display results directly in the GUI.
@@ -336,7 +336,7 @@ Support this command:
 
 - `simple_gui/client_state_machine.py`
 - Possibly `simple_gui/GUI.py` if images should be displayed inside the GUI.
-- Existing helper file: `ai_pic2.py`
+- AI picture generation is implemented directly in `simple_gui/client_state_machine.py`; the old standalone example is archived in `unused_code/`.
 
 ### 6.3 Simple Implementation Steps
 

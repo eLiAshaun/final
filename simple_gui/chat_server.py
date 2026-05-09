@@ -24,6 +24,7 @@ class Server:
         self.group = grp.Group()
         #start server
         self.server=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.server.bind(SERVER)
         self.server.listen(5)
         self.all_sockets.append(self.server)
@@ -139,10 +140,13 @@ class Server:
 #             retrieve a sonnet
 #==============================================================================
             elif msg["action"] == "poem":
-                poem_indx = int(msg["target"])
                 from_name = self.logged_sock2name[from_sock]
-                print(from_name + ' asks for ', poem_indx)
-                poem = self.sonnet.get_poem(poem_indx)
+                try:
+                    poem_indx = int(msg["target"])
+                    print(from_name + ' asks for ', poem_indx)
+                    poem = self.sonnet.get_poem(poem_indx)
+                except Exception:
+                    poem = []
                 poem = '\n'.join(poem).strip()
                 print('here:\n', poem)
                 mysend(from_sock, json.dumps({"action":"poem", "results":poem}))

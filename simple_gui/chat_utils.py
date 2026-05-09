@@ -9,12 +9,22 @@ CHAT_IP = ''#socket.gethostbyname(socket.gethostname())
 CHAT_PORT = 1112
 SERVER = (CHAT_IP, CHAT_PORT)
 
-menu = "\n++++ Choose one of the following commands\n \
+menu = "\n++++ Choose one of the following commands or GUI buttons\n \
         time: calendar time in the system\n \
         who: to find out who else are there\n \
         c _peer_: to connect to the _peer_ and chat\n \
         ? _term_: to search your chat logs where _term_ appears\n \
         p _#_: to get number <#> sonnet\n \
+        /bot: _question_: ask the chatbot directly\n \
+        /chatbots: list available chatbot roles\n \
+        /chatbot: _name_: select a chatbot role\n \
+        /personality: _style_: create a custom chatbot personality\n \
+        @bot _question_: ask the bot inside a peer chat\n \
+        /summary: summarize local chat history\n \
+        /keywords: extract local chat keywords\n \
+        /nlp:on or /nlp:off: switch DeepSeek NLP analysis\n \
+        /archive: show local JSONL chat archive path\n \
+        /aipic: _prompt_: generate and save an AI picture\n \
         q: to leave the chat system\n\n"
 
 S_OFFLINE   = 0

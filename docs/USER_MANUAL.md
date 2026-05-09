@@ -9,13 +9,15 @@ Main features:
 - GUI login window
 - Real-time message display
 - Two-way chat between clients
-- Server time command
-- Online user list command
-- Shakespeare sonnet retrieval
-- Chat history search
-- DeepSeek chatbot command
-- Chatbot personality setting
-- Group chat bot interaction with `@bot`
+- Server time command and button
+- Online user list command and button
+- Shakespeare sonnet retrieval command and button
+- Chat history search command and button
+- DeepSeek chatbot command and button
+- Chatbot role selection with a GUI dropdown and `/chatbot:` command
+- Chatbot personality setting command and button
+- Group chat bot interaction with `@bot` and a GUI button
+- Chat summary, keyword extraction, sentiment labels, optional DeepSeek NLP analysis, local JSONL chat archives, and AI picture generation
 
 ## 2. Requirements
 
@@ -38,6 +40,7 @@ Installed Python packages include:
 - `nltk`
 - `textblob`
 - `pillow`
+- `customtkinter`
 
 ## 3. Project Structure
 
@@ -45,6 +48,7 @@ Important files:
 
 ```text
 final/
+├── start_chat_system.py         # One-command launcher
 ├── simple_gui/
 │   ├── chat_server.py           # Chat server entry point
 │   ├── chat_cmdl_client.py      # GUI client entry point
@@ -52,13 +56,10 @@ final/
 │   ├── client_state_machine.py  # Client command logic and chatbot integration
 │   ├── GUI.py                   # Tkinter GUI
 │   ├── chat_utils.py            # Socket protocol helpers
+│   ├── nlp_tools.py             # NLP helper functions
 │   └── AllSonnets.txt           # Sonnet data
-├── chat_bot_client.py           # Provided chatbot template
-├── ai_client.py                 # Provided LLM API example
-├── nlp_tools.py                 # NLP helper functions
-├── ai_pic2.py                   # AI image generation example
-├── FINAL_PROJECT_TODO.md        # Remaining project work guide
-└── USER_MANUAL.md               # This manual
+├── docs/                        # Manuals, project notes, and course documents
+└── unused_code/                 # Local ignored archive for unused/reference code
 ```
 
 ## 4. Environment Setup
@@ -155,7 +156,7 @@ Do not log in two clients with the same username.
 
 ## 6. Basic Commands
 
-After logging in, users can type commands into the GUI input box.
+After logging in, users can type commands into the GUI input box or use the `GUI Actions` button panel on the right side of the chat window.
 
 ### 6.1 Show Online Users
 
@@ -246,6 +247,23 @@ Expected result:
 
 - The user leaves the chat system.
 
+### 6.9 DeepSeek NLP and Archive
+
+Use the `DeepSeek NLP` switch in the right panel, or type:
+
+```text
+/nlp:on
+/keywords
+/summary
+/archive
+```
+
+Expected result:
+
+- When DeepSeek NLP is enabled, sentiment labels, keywords, and summaries use DeepSeek first.
+- If the API is unavailable, the system falls back to local NLP tools.
+- `/archive` shows the current user's JSONL archive path under `simple_gui/chat_archives/`.
+
 ## 7. Chatbot Features
 
 The chatbot uses the DeepSeek API. Make sure `DEEPSEEK_API_KEY` is set before starting the client.
@@ -263,7 +281,21 @@ Expected result:
 [Bot] ...
 ```
 
-### 7.2 Set Bot Personality
+### 7.2 Select a Chatbot Role
+
+Use the GUI dropdown on the right, or type:
+
+```text
+/chatbots
+/chatbot: Python Tutor
+```
+
+Expected result:
+
+- The selected chatbot role is displayed in the GUI.
+- Later `/bot:` and `@bot` answers use that role.
+
+### 7.3 Set Bot Personality
 
 ```text
 /personality: a funny but helpful Python tutor
@@ -279,7 +311,7 @@ Expected result:
 
 - The bot answers using the selected personality.
 
-### 7.3 Use Bot in Group Chat
+### 7.4 Use Bot in Group Chat
 
 First connect Alice to Bob:
 
@@ -313,12 +345,14 @@ Use this flow for testing or recording the project video:
 8. Alice types `c Bob`.
 9. Alice sends `hello Bob`.
 10. Bob sends `hi Alice`.
-11. Alice types `/bot: introduce yourself in one sentence`.
-12. Alice types `/personality: a funny Python tutor`.
-13. Alice types `/bot: explain sockets`.
-14. Alice types `@bot summarize what a socket server does`.
-15. Alice types `bye`.
-16. Alice types `? hello`.
+11. Alice selects `Python Tutor` from the chatbot dropdown or types `/chatbot: Python Tutor`.
+12. Alice types `/bot: introduce yourself in one sentence`.
+13. Alice types `/personality: a funny Python tutor`.
+14. Alice types `/bot: explain sockets`.
+15. Alice types `@bot summarize what a socket server does`.
+16. Alice types `/summary`, `/keywords`, and `/aipic: a cute robot helping students debug Python code`.
+17. Alice types `bye`.
+18. Alice types `? hello`.
 
 ## 9. Testing Checklist
 

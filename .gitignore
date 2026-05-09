@@ -1,1 +1,15 @@
 icdsproject/
+icdsproject-*/
+.venv/
+.env
+simple_gui/.env
+__pycache__/
+*.pyc
+.DS_Store
+*.idx
+cat.png
+unused_code/
+generated_images/
+simple_gui/generated_images/
+chat_archives/
+simple_gui/chat_archives/
